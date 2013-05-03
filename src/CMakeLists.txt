@@ -3,7 +3,7 @@
 ##########################################
 
 # Create a library called "libepoc"
-ADD_LIBRARY (emokit STATIC emokit.c) 
+ADD_LIBRARY (emokit SHARED emokit.c) 
 target_link_libraries (emokit ${LIBS}) 
 
 INSTALL (TARGETS emokit
@@ -12,6 +12,6 @@ INSTALL (TARGETS emokit
   )
 
 INSTALL(FILES
-  ${LIBEMOKIT_HEADERS}
-  DESTINATION include/libemokit
+  emokit.h
+  DESTINATION include/emokit
   )
