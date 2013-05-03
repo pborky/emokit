@@ -14,12 +14,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include "hidapi/hidapi.h"
+#include "mcrypt.h"
+
 #ifndef LIBEMOKIT_H_
 #define LIBEMOKIT_H_
 
 #define E_EMOKIT_DRIVER_ERROR -1
 #define E_EMOKIT_NOT_INITED -2
 #define E_EMOKIT_NOT_OPENED -3
+
+#define MAX_STR 255
+
+#define EMOKIT_KEYSIZE 16 /* 128 bits == 16 bytes */
+
 
 #include <stdint.h>
 #if !defined(WIN32)
@@ -49,13 +57,27 @@ struct emokit_frame {
 	char gyroX, gyroY;
 	unsigned char battery; //percentage of full charge, read on counter=128
 };
+struct emokit_device {
+        hid_device* _dev;
+        wchar_t serial[MAX_STR]; // USB Dongle serial number
+        int _is_open; // Is device currently open
+        int _is_inited; // Is device current initialized
+        MCRYPT td; // mcrypt context
+        unsigned char key[EMOKIT_KEYSIZE]; // crypt key for device
+        unsigned char *block_buffer; // temporary storage for decrypt
+        int blocksize; // Size of current block
+        struct emokit_frame current_frame; // Last information received from headset
+        unsigned char raw_frame[32]; // Raw encrypted data received from headset
+        unsigned char raw_unenc_frame[32]; // Raw unencrypted data received from headset
+        unsigned char last_battery; //last reported battery value, in percentage of full
+        struct emokit_contact_quality last_quality; //last reported contact quality
+};
 
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-	struct emokit_device;
 	/**
 	 * Kills crypto context. Not meant for public calling, call
 	 * emokit_delete instead.

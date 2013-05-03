@@ -49,21 +49,6 @@ const unsigned char O2_MASK[14] = {140, 141, 142, 143, 128, 129, 130, 131, 132, 
 const unsigned char O1_MASK[14] = {102, 103, 88, 89, 90, 91, 92, 93, 94, 95, 80, 81, 82, 83};
 const unsigned char FC5_MASK[14] = {28, 29, 30, 31, 16, 17, 18, 19, 20, 21, 22, 23, 8, 9};
 const unsigned char QUALITY_MASK[14]={99,100,101,102,103,104,105,106,107,108,109,110,111,112};
-struct emokit_device {
-	hid_device* _dev;
-	wchar_t serial[MAX_STR]; // USB Dongle serial number
-	int _is_open; // Is device currently open
-	int _is_inited; // Is device current initialized
-	MCRYPT td; // mcrypt context
-	unsigned char key[EMOKIT_KEYSIZE]; // crypt key for device
-	unsigned char *block_buffer; // temporary storage for decrypt
-	int blocksize; // Size of current block
-	struct emokit_frame current_frame; // Last information received from headset
-	unsigned char raw_frame[32]; // Raw encrypted data received from headset
-	unsigned char raw_unenc_frame[32]; // Raw unencrypted data received from headset
-	unsigned char last_battery; //last reported battery value, in percentage of full
-	struct emokit_contact_quality last_quality; //last reported contact quality
-};
 
 struct emokit_device* emokit_create()
 {
