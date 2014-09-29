@@ -212,28 +212,23 @@ def get_linux_setup():
     """
     raw_inputs = []
     for filename in os.listdir("/sys/class/hidraw"):
-        real_path = check_output(["realpath", "/sys/class/hidraw/" + filename])
-        split_path = real_path.split('/')
-        s = len(split_path)
-        s -= 4
-        i = 0
-        path = ""
-        while s > i:
-            path = path + split_path[i] + "/"
-            i += 1
+        full_name = "/sys/class/hidraw/" + filename
+        real_path = os.path.realpath(full_name)
+        split_path = filter(None, real_path.split(os.sep))
+        path = os.path.join('/', *split_path[:-4])
         raw_inputs.append([path, filename])
-    for input in raw_inputs:
+    for path, filename in raw_inputs:
         try:
-            with open(input[0] + "/manufacturer", 'r') as f:
+            with open(path + "/manufacturer", 'r') as f:
                 manufacturer = f.readline()
                 f.close()
             if "Emotiv Systems" in manufacturer:
-                with open(input[0] + "/serial", 'r') as f:
+                with open(path + "/serial", 'r') as f:
                     serial = f.readline().strip()
                     f.close()
-                print "Serial: " + serial + " Device: " + input[1]
+                print "Serial: " + serial + " Device: " + filename
                 # Great we found it. But we need to use the second one...
-                hidraw = input[1]
+                hidraw = filename
                 hidraw_id = int(hidraw[-1])
                 # The dev headset might use the first device, or maybe if more than one are connected they might.
                 hidraw_id += 1
@@ -602,7 +597,7 @@ class Emotiv(object):
         Returns an EmotivPacket popped off the Queue.
         """
         try:
-            return self.packets.get()
+            return self.packets.get(timeout=0.1)
         except Exception, e:
             print e
 
