@@ -34,20 +34,20 @@
 #define EMOKIT_REPORT_SIZE 9
 
 
-const unsigned char F3_MASK[14] = {10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4, 5, 6, 7};
-const unsigned char FC6_MASK[14] = {214, 215, 200, 201, 202, 203, 204, 205, 206, 207, 192, 193, 194, 195};
-const unsigned char P7_MASK[14] = {84, 85, 86, 87, 72, 73, 74, 75, 76, 77, 78, 79, 64, 65};
-const unsigned char T8_MASK[14] = {160, 161, 162, 163, 164, 165, 166, 167, 152, 153, 154, 155, 156, 157};
+const unsigned char Fp1_MASK[14] = {10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4, 5, 6, 7};
+const unsigned char P4_MASK[14] = {214, 215, 200, 201, 202, 203, 204, 205, 206, 207, 192, 193, 194, 195};
+const unsigned char AFz_MASK[14] = {84, 85, 86, 87, 72, 73, 74, 75, 76, 77, 78, 79, 64, 65};
+const unsigned char T6_MASK[14] = {160, 161, 162, 163, 164, 165, 166, 167, 152, 153, 154, 155, 156, 157};
 const unsigned char F7_MASK[14] = {48, 49, 50, 51, 52, 53, 54, 55, 40, 41, 42, 43, 44, 45};
 const unsigned char F8_MASK[14] = {178, 179, 180, 181, 182, 183, 168, 169, 170, 171, 172, 173, 174, 175};
-const unsigned char T7_MASK[14] = {66, 67, 68, 69, 70, 71, 56, 57, 58, 59, 60, 61, 62, 63};
-const unsigned char P8_MASK[14] = {158, 159, 144, 145, 146, 147, 148, 149, 150, 151, 136, 137, 138, 139};
-const unsigned char AF4_MASK[14] = {196, 197, 198, 199, 184, 185, 186, 187, 188, 189, 190, 191, 176, 177};
-const unsigned char F4_MASK[14] = {216, 217, 218, 219, 220, 221, 222, 223, 208, 209, 210, 211, 212, 213};
-const unsigned char AF3_MASK[14] = {46, 47, 32, 33, 34, 35, 36, 37, 38, 39, 24, 25, 26, 27};
-const unsigned char O2_MASK[14] = {140, 141, 142, 143, 128, 129, 130, 131, 132, 133, 134, 135, 120, 121};
-const unsigned char O1_MASK[14] = {102, 103, 88, 89, 90, 91, 92, 93, 94, 95, 80, 81, 82, 83};
-const unsigned char FC5_MASK[14] = {28, 29, 30, 31, 16, 17, 18, 19, 20, 21, 22, 23, 8, 9};
+const unsigned char T5_MASK[14] = {66, 67, 68, 69, 70, 71, 56, 57, 58, 59, 60, 61, 62, 63};
+const unsigned char Cz_MASK[14] = {158, 159, 144, 145, 146, 147, 148, 149, 150, 151, 136, 137, 138, 139};
+const unsigned char O2_MASK[14] = {196, 197, 198, 199, 184, 185, 186, 187, 188, 189, 190, 191, 176, 177};
+const unsigned char Fp2_MASK[14] = {216, 217, 218, 219, 220, 221, 222, 223, 208, 209, 210, 211, 212, 213};
+const unsigned char O1_MASK[14] = {46, 47, 32, 33, 34, 35, 36, 37, 38, 39, 24, 25, 26, 27};
+const unsigned char Pz_MASK[14] = {140, 141, 142, 143, 128, 129, 130, 131, 132, 133, 134, 135, 120, 121};
+const unsigned char Fz_MASK[14] = {102, 103, 88, 89, 90, 91, 92, 93, 94, 95, 80, 81, 82, 83};
+const unsigned char P3_MASK[14] = {28, 29, 30, 31, 16, 17, 18, 19, 20, 21, 22, 23, 8, 9};
 const unsigned char QUALITY_MASK[14]={99,100,101,102,103,104,105,106,107,108,109,110,111,112};
 
 struct emokit_device* emokit_create()
@@ -289,103 +289,103 @@ EMOKIT_DECLSPEC struct emokit_contact_quality handle_quality(struct emokit_devic
 	int current_contact_quality=get_level(s->raw_unenc_frame,QUALITY_MASK);
 	switch(s->raw_unenc_frame[0]) {
 			case 0:
-				s->last_quality.F3=current_contact_quality;
+				s->last_quality.Fp1=current_contact_quality;
 				break;
 			case 1:
-				s->last_quality.FC5=current_contact_quality;
+				s->last_quality.P3=current_contact_quality;
 				break;
 			case 2:
-				s->last_quality.AF3=current_contact_quality;
+				s->last_quality.O1=current_contact_quality;
 				break;
 			case 3:
 				s->last_quality.F7=current_contact_quality;
 				break;
 			case 4:
-				s->last_quality.T7=current_contact_quality;
+				s->last_quality.T5=current_contact_quality;
 				break;
 			case 5:
-				s->last_quality.P7=current_contact_quality;
+				s->last_quality.AFz=current_contact_quality;
 				break;
 			case 6:
-				s->last_quality.O1=current_contact_quality;
+				s->last_quality.Fz=current_contact_quality;
 				break;
 			case 7:
-				s->last_quality.O2=current_contact_quality;
+				s->last_quality.Pz=current_contact_quality;
 				break;
 			case 8:
-				s->last_quality.P8=current_contact_quality;
+				s->last_quality.Cz=current_contact_quality;
 				break;
 			case 9:
-				s->last_quality.T8=current_contact_quality;
+				s->last_quality.T6=current_contact_quality;
 				break;
 			case 10:
 				s->last_quality.F8=current_contact_quality;
 				break;
 			case 11:
-				s->last_quality.AF4=current_contact_quality;
+				s->last_quality.O2=current_contact_quality;
 				break;
 			case 12:
-				s->last_quality.FC6=current_contact_quality;
+				s->last_quality.P4=current_contact_quality;
 				break;
 			case 13:
-				s->last_quality.F4=current_contact_quality;
+				s->last_quality.Fp2=current_contact_quality;
 				break;
 			case 14:
 				s->last_quality.F8=current_contact_quality;
 				break;
 			case 15:
-				s->last_quality.AF4=current_contact_quality;
+				s->last_quality.O2=current_contact_quality;
 				break;
 			case 64:
-				s->last_quality.F3=current_contact_quality;
+				s->last_quality.Fp1=current_contact_quality;
 				break;
 			case 65:
-				s->last_quality.FC5=current_contact_quality;
+				s->last_quality.P3=current_contact_quality;
 				break;
 			case 66:
-				s->last_quality.AF3=current_contact_quality;
+				s->last_quality.O1=current_contact_quality;
 				break;
 			case 67:
 				s->last_quality.F7=current_contact_quality;
 				break;
 			case 68:
-				s->last_quality.T7=current_contact_quality;
+				s->last_quality.T5=current_contact_quality;
 				break;
 			case 69:
-				s->last_quality.P7=current_contact_quality;
+				s->last_quality.AFz=current_contact_quality;
 				break;
 			case 70:
-				s->last_quality.O1=current_contact_quality;
+				s->last_quality.Fz=current_contact_quality;
 				break;
 			case 71:
-				s->last_quality.O2=current_contact_quality;
+				s->last_quality.Pz=current_contact_quality;
 				break;
 			case 72:
-				s->last_quality.P8=current_contact_quality;
+				s->last_quality.Cz=current_contact_quality;
 				break;
 			case 73:
-				s->last_quality.T8=current_contact_quality;
+				s->last_quality.T6=current_contact_quality;
 				break;
 			case 74:
 				s->last_quality.F8=current_contact_quality;
 				break;
 			case 75:
-				s->last_quality.AF4=current_contact_quality;				
+				s->last_quality.O2=current_contact_quality;				
 				break;
 			case 76:
-				s->last_quality.FC6=current_contact_quality;
+				s->last_quality.P4=current_contact_quality;
 				break;
 			case 77:
-				s->last_quality.F4=current_contact_quality;
+				s->last_quality.Fp2=current_contact_quality;
 				break;
 			case 78:
 				s->last_quality.F8=current_contact_quality;
 				break;
 			case 79:
-				s->last_quality.AF4=current_contact_quality;
+				s->last_quality.O2=current_contact_quality;
 				break;
 			case 80:
-				s->last_quality.FC6=current_contact_quality;
+				s->last_quality.P4=current_contact_quality;
 				break;				
 			default:
 				break;
@@ -413,20 +413,20 @@ struct emokit_frame emokit_get_next_frame(struct emokit_device* s) {
 		k.counter = s->raw_unenc_frame[0];
 		k.battery = s->last_battery;
 	}
-	k.F3 = get_level(s->raw_unenc_frame, F3_MASK);
-	k.FC6 = get_level(s->raw_unenc_frame, FC6_MASK);
-	k.P7 = get_level(s->raw_unenc_frame, P7_MASK);
-	k.T8 = get_level(s->raw_unenc_frame, T8_MASK);
+	k.Fp1 = get_level(s->raw_unenc_frame, Fp1_MASK);
+	k.P4 = get_level(s->raw_unenc_frame, P4_MASK);
+	k.AFz = get_level(s->raw_unenc_frame, AFz_MASK);
+	k.T6 = get_level(s->raw_unenc_frame, T6_MASK);
 	k.F7 = get_level(s->raw_unenc_frame, F7_MASK);
 	k.F8 = get_level(s->raw_unenc_frame, F8_MASK);
-	k.T7 = get_level(s->raw_unenc_frame, T7_MASK);
-	k.P8 = get_level(s->raw_unenc_frame, P8_MASK);
-	k.AF4 = get_level(s->raw_unenc_frame, AF4_MASK);
-	k.F4 = get_level(s->raw_unenc_frame, F4_MASK);
-	k.AF3 = get_level(s->raw_unenc_frame, AF3_MASK);
+	k.T5 = get_level(s->raw_unenc_frame, T5_MASK);
+	k.Cz = get_level(s->raw_unenc_frame, Cz_MASK);
 	k.O2 = get_level(s->raw_unenc_frame, O2_MASK);
+	k.Fp2 = get_level(s->raw_unenc_frame, Fp2_MASK);
 	k.O1 = get_level(s->raw_unenc_frame, O1_MASK);
-	k.FC5 = get_level(s->raw_unenc_frame, FC5_MASK);
+	k.Pz = get_level(s->raw_unenc_frame, Pz_MASK);
+	k.Fz = get_level(s->raw_unenc_frame, Fz_MASK);
+	k.P3 = get_level(s->raw_unenc_frame, P3_MASK);
 
 	k.gyroX = s->raw_unenc_frame[29] - 102;
 	k.gyroY = s->raw_unenc_frame[30] - 104;

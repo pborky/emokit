@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 			osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
 			p << osc::BeginBundleImmediate
 			  << osc::BeginMessage( "/epoc/channels" )
-			  << frame.F3 << frame.FC6 << frame.P7 << frame.T8 << frame.F7 << frame.F8 << frame.T7 << frame.P8 << frame.AF4 << frame.F4 << frame.AF3 << frame.O2 << frame.O1 << frame.FC5 << osc::EndMessage
+			  << frame.Fp1 << frame.P4 << frame.AFz << frame.T6 << frame.F7 << frame.F8 << frame.T5 << frame.Cz << frame.O2 << frame.Fp2 << frame.O1 << frame.Pz << frame.Fz << frame.P3 << osc::EndMessage
 			  << osc::BeginMessage( "/epoc/gyro" ) 
 			  << frame.gyroX << frame.gyroY << osc::EndMessage
 			  << osc::EndBundle;

@@ -47,12 +47,12 @@ const static uint32_t EMOKIT_OUT_ENDPT = 0x02;
 const static uint32_t EMOKIT_IN_ENDPT  = 0x82;
 
 struct emokit_contact_quality {//values > 4000 are good
-	short F3, FC6, P7, T8, F7, F8, T7, P8, AF4, F4, AF3, O2, O1, FC5;
+	short Fp1, P4, AFz, T6, F7, F8, T5, Cz, O2, Fp2, O1, Pz, Fz, P3;
 };
 
 struct emokit_frame {
 	unsigned char counter; //loops from 0 to 128 (129 values)
-	int F3, FC6, P7, T8, F7, F8, T7, P8, AF4, F4, AF3, O2, O1, FC5; //raw data values
+	int Fp1, P4, AFz, T6, F7, F8, T5, Cz, O2, Fp2, O1, Pz, Fz, P3; //raw data values
 	struct emokit_contact_quality cq;
 	char gyroX, gyroY;
 	unsigned char battery; //percentage of full charge, read on counter=128
